@@ -1,0 +1,31 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Build output
+*.out
+*.a
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Go build/cache
+bin/
+*.test
+*.log
+
+# IDE/editor junk
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependency directories (if vendoring)
+vendor/
+
+# Env/config (if you add later)
+.env
