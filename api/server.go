@@ -22,6 +22,7 @@ func NewServer(matcher *engine.Matcher) *Server {
 func (s *Server) Start() {
 	http.HandleFunc("/order", s.handleOrder)
 	http.HandleFunc("/trades", s.handleGetTrades)
+	http.HandleFunc("/orderbook", s.handleGetOrderBook)
 
 	fmt.Println("🌐 API running at http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))
@@ -56,4 +57,22 @@ func (s *Server) handleGetTrades(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(trades)
+}
+
+// ✅ NEW: /orderbook endpoint
+func (s *Server) handleGetOrderBook(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Only GET allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	buys, sells := s.matcher.GetOrderBook()
+
+	data := map[string]interface{}{
+		"buyOrders":  buys,
+		"sellOrders": sells,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(data)
 }

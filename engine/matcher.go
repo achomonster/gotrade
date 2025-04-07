@@ -100,6 +100,11 @@ func (m *Matcher) GetTrades() []models.Trade {
 	return m.Trades
 }
 
+// ✅ NEW: Return current buy/sell order slices
+func (m *Matcher) GetOrderBook() (buyOrders, sellOrders []*models.Order) {
+	return m.orderBook.BuyOrders, m.orderBook.SellOrders
+}
+
 func min(a, b float64) float64 {
 	if a < b {
 		return a
