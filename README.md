@@ -33,11 +33,10 @@ This project shows off:
 
 ## 📡 API Endpoints
 
-### POST `/order`
+### POST /order
+Submit a new order to the exchange.
 
-Send a new order.
-
-```json
+Request body (JSON):
 {
   "id": "123",
   "traderId": "alice",
@@ -45,3 +44,46 @@ Send a new order.
   "price": 101,
   "quantity": 2
 }
+
+### GET /trades
+Returns a list of all executed trades.
+
+Response (JSON):
+[
+  {
+    "BuyOrderID": "123",
+    "SellOrderID": "456",
+    "Price": 105,
+    "Quantity": 1,
+    "Timestamp": "10:32:12"
+  }
+]
+
+### GET /orderbook
+Returns the current state of the order book.
+
+Response (JSON):
+{
+  "buyOrders": [
+    {
+      "ID": "1001",
+      "TraderID": "bob",
+      "Type": "buy",
+      "Price": 105,
+      "Quantity": 3
+    }
+  ],
+  "sellOrders": [
+    {
+      "ID": "1002",
+      "TraderID": "carol",
+      "Type": "sell",
+      "Price": 108,
+      "Quantity": 2
+    }
+  ]
+}
+
+## 📄 License
+
+Licensed under the MIT License.
